@@ -1,61 +1,38 @@
-name: CI
+name: arcrc
 
-# Runs tests on pushes/PRs and publishes to PyPI on v* tags when PYPI_API_TOKEN is configured.
 on:
   push:
-    branches: ["main"]
+    branches: [master, develop]
   pull_request:
-    branches: ["main"]
+    branches: [master, develop]
 
 jobs:
-  test:
-    name: Tests (Python ${{ matrix.python-version }})
+  build_sdist:
+    name: Build source distribution
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python-version }}
-          cache: "pip"
-          cache-dependency-path: "pyproject.toml"
-      - name: Install dependencies
+      - uses: actions/checkout@v6
+      - name: Build sdist
         run: |
-          python -m pip install --upgrade pip
-          python -m pip install -e .[dev]
-      - name: Run tests
-        run: python -m pytest
+          pip install -U build
+          python -m build --sdist
+      - uses: actions/upload-artifact@v6
+        with:
+          path: dist/*.tar.gz
+          include-hidden-files: true
 
-  publish:
-    name: Publish to PyPI
-    needs: test
+  upload_pypi:
+    needs: [build_wheels, build_sdist]
     runs-on: ubuntu-latest
     permissions:
       id-token: write
       contents: read
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/download-artifact@v7
         with:
-          python-version: "3.10"
-          cache: "pip"
-          cache-dependency-path: "pyproject.toml"
-      - name: Install build tools
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install build
-      - name: Build distributions
-        run: python -m build
+          path: dist
+          merge-multiple: true
       - name: Publish package to PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
+        uses: pypa/gh-action-pypi-publish@v1.13.0
         with:
-          user: __token__
-          password: ${{ secrets.PYPI_API_TOKEN }} # Set this repository secret to a PyPI token with publish rights.
-          verbose: true
+          attestations: true
