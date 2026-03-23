@@ -3,7 +3,7 @@
 ## Python
 ### Basic CRC32
 ```python
-import ascrc as crc
+import arcrc as crc
 
 data = b"123456789"
 assert crc.crc32_runtime(data) == 0xCBF43926

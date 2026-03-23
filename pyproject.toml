@@ -23,6 +23,9 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools]
 package-dir = {"" = "src"}
 
+[tool.setuptools.package-data]
+"*" = ["*.c", "*.h"]
+
 [tool.setuptools.packages.find]
 where = ["src"]
 
