@@ -38,7 +38,7 @@ assert crc.crc32_runtime(data) == crc.crc32_table(data)
 
 See `docs\\examples.md` for more samples.
 
-## C API (incremental-friendly)
+## C API
 Header: `Crc.h`. Signatures (examples):  
 `uint8 Crc_CalculateCRC8(const uint8* data, uint32 len, uint8 start, boolean isFirst);`  
 `uint32 Crc_CalculateCRC32(const uint8* data, uint32 len, uint32 start, boolean isFirst);`
