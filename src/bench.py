@@ -1,7 +1,7 @@
 
 import os
 import time
-import ascrc
+import arcrc
 
 
 def bench(fn, data, loops=200):

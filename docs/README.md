@@ -1,6 +1,6 @@
-# ascrc documentation
+# arcrc documentation
 
-CRC algorithms (runtime and table variants) for AUTOSAR-style interfaces and Python helpers. Supported polynomials:
+AUTOSAR CRC algorithms (runtime and table variants) for Python. Supported polynomials:
 
 - CRC-8 SAE J1850 (0x1D), init 0xFF, xor 0xFF, no reflection
 - CRC-8 H2F (0x2F), init 0xFF, xor 0xFF, no reflection
@@ -30,7 +30,7 @@ All functions accept an iterable of ints/bytes. Runtime and table variants shoul
 Defaults align to the polynomials above. Example:
 
 ```python
-import ascrc as crc
+import arcrc as crc
 data = b"123456789"
 print(hex(crc.crc32_runtime(data)))  # 0xcbf43926
 assert crc.crc32_runtime(data) == crc.crc32_table(data)
@@ -53,9 +53,3 @@ crc = Crc_CalculateCRC8(&data[2], 1u, crc, FALSE);
 crc = Crc_CalculateCRC8(&data[3], 1u, crc, FALSE); // crc == 0xB8
 ```
 
-## Repository layout (high-level)
-- `src/ascrc/crc_module.py` — Python runtime/table implementations and tables.
-- `src/ascrc/__init__.py` — Public exports.
-- `tests/test_crc.py` — Canonical vectors, parity checks, and randomized runtime/table equality.
-- `Crc.c`, `Crc.h` — AUTOSAR-style C implementations and tables.
-- `src/bench.py` — Micro-benchmark helper.

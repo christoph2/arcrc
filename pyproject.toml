@@ -1,6 +1,6 @@
 
 [project]
-name = "ascrc"
+name = "arcrc"
 version = "0.1.0"
 description = "Autosar CRC-8, CRC-16-CCITT und CRC-32 (IEEE) – Runtime- and Tablevariants"
 authors = [
@@ -8,6 +8,10 @@ authors = [
 ]
 readme = "README.md"
 requires-python = ">=3.10"
+
+[project.urls]
+Homepage = "https://github.com/christoph2/arcrc"
+Repository = "https://github.com/christoph2/arcrc"
 
 [project.optional-dependencies]
 dev = ["pytest"]

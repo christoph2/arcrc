@@ -2,7 +2,7 @@ import os
 
 import pytest
 
-import ascrc as crc
+import arcrc as crc
 
 
 CHECK_VECTOR = b"123456789"
