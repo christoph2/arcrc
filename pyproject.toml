@@ -1,12 +1,12 @@
 
 [project]
 name = "arcrc"
-version = "0.1.0"
+version = "0.1.1"
 description = "Autosar CRC-8, CRC-16-CCITT und CRC-32 (IEEE) – Runtime- and Tablevariants"
 authors = [
     { name = "Christoph Schueler" }
 ]
-readme = "README.md"
+readme = { file = "README.md", content-type = "text/markdown" }
 requires-python = ">=3.10"
 
 [project.urls]
@@ -14,7 +14,7 @@ Homepage = "https://github.com/christoph2/arcrc"
 Repository = "https://github.com/christoph2/arcrc"
 
 [project.optional-dependencies]
-dev = ["pytest"]
+dev = ["pytest", "bumpver", "pre-commit"]
 
 [build-system]
 requires = ["setuptools>=61"]
@@ -22,3 +22,15 @@ build-backend = "setuptools.build_meta"
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]
+
+[tool.bumpver]
+current_version = "0.1.1"
+version_pattern = "MAJOR.MINOR.PATCH"
+commit = false
+tag = false
+push = false
+
+[tool.bumpver.file_patterns]
+"pyproject.toml" = [
+    'version = "{version}"'
+]
