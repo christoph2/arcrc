@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 [project]
 name = "arcrc"
-version = "0.1.5"
+version = "0.1.7"
 description = "Autosar CRC-8, CRC-16-CCITT und CRC-32 (IEEE) – Runtime- and Tablevariants"
 authors = [
     { name = "Christoph Schueler", email = "cpu12.gems@googlemail.com" },
@@ -31,7 +31,7 @@ where = ["src"]
 pythonpath = ["src"]
 
 [tool.bumpver]
-current_version = "0.1.5"
+current_version = "0.1.7"
 version_pattern = "MAJOR.MINOR.PATCH"
 commit = false
 tag = false
