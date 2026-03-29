@@ -39,8 +39,8 @@ assert crc.crc32_runtime(data) == crc.crc32_table(data)
 See `docs\\examples.md` for more samples.
 
 ## C API
-Header: `Crc.h`. Signatures (examples):  
-`uint8 Crc_CalculateCRC8(const uint8* data, uint32 len, uint8 start, boolean isFirst);`  
+Header: `Crc.h`. Signatures (examples):
+`uint8 Crc_CalculateCRC8(const uint8* data, uint32 len, uint8 start, boolean isFirst);`
 `uint32 Crc_CalculateCRC32(const uint8* data, uint32 len, uint32 start, boolean isFirst);`
 
 First call (`isFirst = TRUE`): uses the polynomial’s initial value internally; provided start value is ignored. Subsequent call (`isFirst = FALSE`): pass the previous CRC result as `start`; the function un-xors/refects as needed per variant, processes new data, then applies xor-out and reflection on return. This enables chunked CRC calculation across multiple buffers without recomputing from scratch.
@@ -52,4 +52,3 @@ uint8 crc = Crc_CalculateCRC8(data, 2u, 0u, TRUE);
 crc = Crc_CalculateCRC8(&data[2], 1u, crc, FALSE);
 crc = Crc_CalculateCRC8(&data[3], 1u, crc, FALSE); // crc == 0xB8
 ```
-
